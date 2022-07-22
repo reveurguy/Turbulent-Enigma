@@ -41,8 +41,21 @@ function move(gameState) {
 
     // TODO: Step 1 - Don't hit walls.
     // Use information in gameState to prevent your Battlesnake from moving beyond the boundaries of the board.
-    // const boardWidth = gameState.board.width
-    // const boardHeight = gameState.board.height
+    const boardWidth = gameState.board.width
+    const boardHeight = gameState.board.height
+
+    if (myHead.x === 0) {
+        possibleMoves.left = false
+    }
+    if (myHead.x === boardWidth - 1) {
+        possibleMoves.right = false
+    }
+    if (myHead.y === 0) {
+        possibleMoves.up = false
+    }
+    if (myHead.y === boardHeight - 1) {
+        possibleMoves.down = false
+    }
 
     // TODO: Step 2 - Don't hit yourself.
     // Use information in gameState to prevent your Battlesnake from colliding with itself.
@@ -53,6 +66,19 @@ function move(gameState) {
 
     // TODO: Step 4 - Find food.
     // Use information in gameState to seek out and find food.
+    // const food = gameState.board.food
+    //  if (food.length > 0) {
+    //     const foodCoordinates = food[0]
+    //     if (foodCoordinates.x < myHead.x) {
+    //         possibleMoves.left = false
+    //     } else if (foodCoordinates.x > myHead.x) {
+    //         possibleMoves.right = false
+    //     } else if (foodCoordinates.y < myHead.y) {
+    //         possibleMoves.down = false
+    //     } else if (foodCoordinates.y > myHead.y) {
+    //         possibleMoves.up = false
+    //     }
+    // }
 
     // Finally, choose a move from the available safe moves.
     // TODO: Step 5 - Select a move to make based on strategy, rather than random.
