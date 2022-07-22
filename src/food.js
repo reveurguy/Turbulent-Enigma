@@ -29,7 +29,9 @@ function findFood(myHead, food) {
 
     possibleMoves = temp.map(move => move.dir)
     possibleMoves = Object.assign(...possibleMoves.map(k => ({ [k]: true })))
-    return possibleMoves
+
+    const response = possibleMoves
+    return response
 }
 
 module.exports = {

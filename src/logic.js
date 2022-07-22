@@ -1,4 +1,4 @@
-const findFood = require('./food')
+const findFood = require('./food.js')
 
 function info() {
     console.log("INFO")
@@ -35,7 +35,7 @@ function move(gameState) {
     const boardHeight = gameState.board.height
 
 
-    possibleMoves = findFood(myHead, food)
+    possibleMoves = findFood.findFood(myHead, food)
 
     // Step 0: Don't let your Battlesnake move back on its own neck
 
