@@ -26,9 +26,17 @@ function move(gameState) {
         right: true
     }
 
-    // Step 0: Don't let your Battlesnake move back on its own neck
     const myHead = gameState.you.head
     const myNeck = gameState.you.body[1]
+    const food = gameState.board.food
+    const boardWidth = gameState.board.width
+    const boardHeight = gameState.board.height
+
+
+    possibleMoves = findFood(myHead, food)
+
+    // Step 0: Don't let your Battlesnake move back on its own neck
+
     if (myNeck.x < myHead.x) {
         possibleMoves.left = false
     } else if (myNeck.x > myHead.x) {
@@ -41,8 +49,6 @@ function move(gameState) {
 
     // TODO: Step 1 - Don't hit walls.
     // Use information in gameState to prevent your Battlesnake from moving beyond the boundaries of the board.
-    const boardWidth = gameState.board.width
-    const boardHeight = gameState.board.height
 
     if (myHead.x === 0) {
         possibleMoves.left = false
@@ -66,36 +72,6 @@ function move(gameState) {
 
     // TODO: Step 4 - Find food.
     // Use information in gameState to seek out and find food.
-    const food = gameState.board.food
-    let temp = []
-
-    for(let y = 0; y < food.length; y++) {
-        const pickup = food[y];
-
-        if(pickup.x < myHead.x) {
-            temp.push({dir: "left", dist: myHead.x - pickup.x});
-        }
-        else if(pickup.x > myHead.x) {
-            temp.push({dir: "right", dist: pickup.x - myHead.x});
-        }
-
-        if(pickup.y < myHead.y) {
-            temp.push({dir: "down", dist: myHead.y - pickup.y});
-        }
-        else if(pickup.y > myHead.y) {
-            temp.push({dir: "up", dist: pickup.y - myHead.y});
-        }
-    }
-
-    if(temp.length > 0)
-    {
-        temp.sort((a, b) => {
-            return a.dist - b.dist
-        });
-    }
-
-    possibleMoves = temp.map(move => move.dir)
-    possibleMoves = Object.assign(...possibleMoves.map(k => ({ [k]: true })))
 
     // // Avoid hazards
     // let potentialMoves= {
@@ -134,8 +110,6 @@ function move(gameState) {
     // if (possibleMoves.right && potentialMoves.right) {
     //     possibleMoves.right = false
     // }
-
-
 
 
     // Finally, choose a move from the available safe moves.
