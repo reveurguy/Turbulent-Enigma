@@ -80,6 +80,47 @@ function move(gameState) {
         }
     }
 
+    // Avoid hazards
+    let potentialMoves= {
+        up: true,
+        down: true,
+        left: true,
+        right: true
+    }
+    const hazards = gameState.board.hazards
+    // check if  potentialMoves are contained in the list of hazards
+    if (hazards.length > 0) {
+        for (let i = 0; i < hazards.length; i++) {
+            const hazard = hazards[i]
+            if (hazard.x < myHead.x) {
+                potentialMoves.right = false
+            } else if (hazard.x > myHead.x) {
+                potentialMoves.left = false
+            } else if (hazard.y < myHead.y) {
+                potentialMoves.up = false
+            } else if (hazard.y > myHead.y) {
+                potentialMoves.down = false
+
+            }
+        }
+    }
+    // check if potentialMoves are contained in the list of possibleMoves
+    if (possibleMoves.up && potentialMoves.up) {
+        possibleMoves.up = false
+    }
+    if (possibleMoves.down && potentialMoves.down) {
+        possibleMoves.down = false
+    }
+    if (possibleMoves.left && potentialMoves.left) {
+        possibleMoves.left = false
+    }
+    if (possibleMoves.right && potentialMoves.right) {
+        possibleMoves.right = false
+    }
+
+    
+
+
     // Finally, choose a move from the available safe moves.
     // TODO: Step 5 - Select a move to make based on strategy, rather than random.
     const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
