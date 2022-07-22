@@ -66,19 +66,19 @@ function move(gameState) {
 
     // TODO: Step 4 - Find food.
     // Use information in gameState to seek out and find food.
-    // const food = gameState.board.food
-    //  if (food.length > 0) {
-    //     const foodCoordinates = food[0]
-    //     if (foodCoordinates.x < myHead.x) {
-    //         possibleMoves.left = false
-    //     } else if (foodCoordinates.x > myHead.x) {
-    //         possibleMoves.right = false
-    //     } else if (foodCoordinates.y < myHead.y) {
-    //         possibleMoves.down = false
-    //     } else if (foodCoordinates.y > myHead.y) {
-    //         possibleMoves.up = false
-    //     }
-    // }
+    const food = gameState.board.food
+     if (food.length > 0) {
+        const foodCoordinates = food[0]
+        if (foodCoordinates.x < myHead.x) {
+            possibleMoves.right = false
+        } else if (foodCoordinates.x > myHead.x) {
+            possibleMoves.left = false
+        } else if (foodCoordinates.y < myHead.y) {
+            possibleMoves.up = false
+        } else if (foodCoordinates.y > myHead.y) {
+            possibleMoves.down = false
+        }
+    }
 
     // Finally, choose a move from the available safe moves.
     // TODO: Step 5 - Select a move to make based on strategy, rather than random.
