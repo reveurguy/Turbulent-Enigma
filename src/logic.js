@@ -1,3 +1,5 @@
+import findFood from './food'
+
 function info() {
     console.log("INFO")
     const response = {
@@ -123,9 +125,7 @@ function move(gameState) {
     return response
 }
 
-module.exports = {
-    info: info,
-    start: start,
-    move: move,
-    end: end
-}
+export const info = info
+export const start = start
+export const move = move
+export const end = end
