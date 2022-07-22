@@ -94,7 +94,7 @@ function move(gameState) {
         });
     }
 
-    possibleMoves = temp.map(move => move.dir)
+    // possibleMoves = temp.map(move => move.dir)
     console.log('after sort: ', possibleMoves)
     // possibleMoves = Object.assign(...possibleMoves.map(k => ({ [k]: true })))
 
