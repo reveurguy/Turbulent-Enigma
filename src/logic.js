@@ -95,8 +95,7 @@ function move(gameState) {
     }
 
     // possibleMoves = temp.map(move => move.dir)
-    console.log('after sort: ', possibleMoves)
-    // possibleMoves = Object.assign(...possibleMoves.map(k => ({ [k]: true })))
+    possibleMoves = Object.assign(...possibleMoves.map(k => ({ [k]: true })))
 
     // // Avoid hazards
     // let potentialMoves= {
