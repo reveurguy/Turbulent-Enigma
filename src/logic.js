@@ -1,4 +1,4 @@
-import findFood from './food'
+const findFood = require('./food')
 
 function info() {
     console.log("INFO")
@@ -125,7 +125,9 @@ function move(gameState) {
     return response
 }
 
-export const info = info
-export const start = start
-export const move = move
-export const end = end
+module.exports = {
+    info: info,
+    start: start,
+    move: move,
+    end: end
+}

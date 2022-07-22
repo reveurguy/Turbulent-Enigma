@@ -32,4 +32,6 @@ function findFood(myHead, food) {
     return possibleMoves
 }
 
-export const findFood = findFood
+module.exports = {
+    findFood: findFood
+}
