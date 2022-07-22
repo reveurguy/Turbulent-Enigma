@@ -2,10 +2,10 @@ function info() {
     console.log("INFO")
     const response = {
         apiversion: "1",
-        author: "",
-        color: "#888888",
-        head: "default",
-        tail: "default"
+        author: "reveurguy",
+        color: "#c8ffda",
+        head: "trans-rights-scarf",
+        tail: "bolt"
     }
     return response
 }

@@ -1,5 +1,6 @@
 const express = require('express')
 const { info, start, move, end } = require('./logic')
+const http = require('http')
 
 const app = express()
 app.use(express.json())
@@ -7,6 +8,7 @@ app.use(function (req, res, next) {
     res.set("Server", "BattlesnakeOfficial/starter-snake-javascript")
     next()
 })
+
 
 const port = process.env.PORT || 8080
 
@@ -30,3 +32,7 @@ app.post("/end", (req, res) => {
 app.listen(port, () => {
     console.log(`Starting Battlesnake Server at http://0.0.0.0:${port}...`)
 })
+
+setInterval(() => {
+    http.get("https://turbulent-enigma.herokuapp.com/");
+  }, 25 * 60 * 1000); // every 25 minutes
