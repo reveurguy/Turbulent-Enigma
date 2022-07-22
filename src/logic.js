@@ -11,11 +11,11 @@ function info() {
 }
 
 function start(gameState) {
-    console.log(`${gameState.game.id} START`)
+    // console.log(`${gameState.game.id} START`)
 }
 
 function end(gameState) {
-    console.log(`${gameState.game.id} END\n`)
+    // console.log(`${gameState.game.id} END\n`)
 }
 
 function move(gameState) {
@@ -67,58 +67,76 @@ function move(gameState) {
     // TODO: Step 4 - Find food.
     // Use information in gameState to seek out and find food.
     const food = gameState.board.food
-     if (food.length > 0) {
-        const foodCoordinates = food[0]
-        if (foodCoordinates.x < myHead.x) {
-            possibleMoves.right = false
-        } else if (foodCoordinates.x > myHead.x) {
-            possibleMoves.left = false
-        } else if (foodCoordinates.y < myHead.y) {
-            possibleMoves.up = false
-        } else if (foodCoordinates.y > myHead.y) {
-            possibleMoves.down = false
+    let temp = []
+
+    for(let y = 0; y < food.length; y++) {
+        const pickup = food[y];
+
+        if(pickup.x < myHead.x) {
+            temp.push({dir: "left", dist: myHead.x - pickup.x});
+        }
+        else if(pickup.x > myHead.x) {
+            temp.push({dir: "right", dist: pickup.x - myHead.x});
+        }
+
+        if(pickup.y < myHead.y) {
+            temp.push({dir: "down", dist: myHead.y - pickup.y});
+        }
+        else if(pickup.y > myHead.y) {
+            temp.push({dir: "up", dist: pickup.y - myHead.y});
         }
     }
 
-    // Avoid hazards
-    let potentialMoves= {
-        up: true,
-        down: true,
-        left: true,
-        right: true
-    }
-    const hazards = gameState.board.hazards
-    // check if  potentialMoves are contained in the list of hazards
-    if (hazards.length > 0) {
-        for (let i = 0; i < hazards.length; i++) {
-            const hazard = hazards[i]
-            if (hazard.x < myHead.x) {
-                potentialMoves.right = false
-            } else if (hazard.x > myHead.x) {
-                potentialMoves.left = false
-            } else if (hazard.y < myHead.y) {
-                potentialMoves.up = false
-            } else if (hazard.y > myHead.y) {
-                potentialMoves.down = false
-
-            }
-        }
-    }
-    // check if potentialMoves are contained in the list of possibleMoves
-    if (possibleMoves.up && potentialMoves.up) {
-        possibleMoves.up = false
-    }
-    if (possibleMoves.down && potentialMoves.down) {
-        possibleMoves.down = false
-    }
-    if (possibleMoves.left && potentialMoves.left) {
-        possibleMoves.left = false
-    }
-    if (possibleMoves.right && potentialMoves.right) {
-        possibleMoves.right = false
+    if(temp.length > 0)
+    {
+        temp.sort((a, b) => {
+            return a.dist - b.dist
+        });
     }
 
-    
+    possibleMoves = temp.map(move => move.dir)
+    console.log('after sort: ', possibleMoves)
+    // possibleMoves = Object.assign(...possibleMoves.map(k => ({ [k]: true })))
+
+    // // Avoid hazards
+    // let potentialMoves= {
+    //     up: true,
+    //     down: true,
+    //     left: true,
+    //     right: true
+    // }
+    // const hazards = gameState.board.hazards
+    // // check if  potentialMoves are contained in the list of hazards
+    // if (hazards.length > 0) {
+    //     for (let i = 0; i < hazards.length; i++) {
+    //         const hazard = hazards[i]
+    //         if (hazard.x < myHead.x) {
+    //             potentialMoves.right = false
+    //         } else if (hazard.x > myHead.x) {
+    //             potentialMoves.left = false
+    //         } else if (hazard.y < myHead.y) {
+    //             potentialMoves.up = false
+    //         } else if (hazard.y > myHead.y) {
+    //             potentialMoves.down = false
+
+    //         }
+    //     }
+    // }
+    // // check if potentialMoves are contained in the list of possibleMoves
+    // if (possibleMoves.up && potentialMoves.up) {
+    //     possibleMoves.up = false
+    // }
+    // if (possibleMoves.down && potentialMoves.down) {
+    //     possibleMoves.down = false
+    // }
+    // if (possibleMoves.left && potentialMoves.left) {
+    //     possibleMoves.left = false
+    // }
+    // if (possibleMoves.right && potentialMoves.right) {
+    //     possibleMoves.right = false
+    // }
+
+
 
 
     // Finally, choose a move from the available safe moves.
@@ -128,7 +146,7 @@ function move(gameState) {
         move: safeMoves[Math.floor(Math.random() * safeMoves.length)],
     }
 
-    console.log(`${gameState.game.id} MOVE ${gameState.turn}: ${response.move}`)
+    // console.log(`${gameState.game.id} MOVE ${gameState.turn}: ${response.move}`)
     return response
 }
 
