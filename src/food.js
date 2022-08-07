@@ -1,9 +1,9 @@
-
 function findFood(myHead, food) {
     let temp = []
     let possibleMoves = {}
 
     for (let y = 0; y < food.length; y++) {
+        Food(myHead, food)
         const pickup = food[y];
 
         if (pickup.x < myHead.x) {
@@ -32,6 +32,19 @@ function findFood(myHead, food) {
 
     const response = possibleMoves
     return response
+}
+
+function Food(myHead, food) {
+    if (food.length > 1) {
+        for (let f of food)
+            f.distance = blocksBetween(myHead, f)
+        food.sort(function (a, b) { return a.distance - b.distance })
+    }
+    return food;
+}
+
+function blocksBetween(p1, p2) {
+    return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y)
 }
 
 module.exports = {
