@@ -1,6 +1,7 @@
 const express = require('express')
 const { info, start, move, end } = require('./logic')
 const http = require('http')
+const bodyParser = require('body-parser')
 
 const app = express()
 app.use(express.json())
@@ -8,6 +9,7 @@ app.use(function (req, res, next) {
     res.set("Server", "BattlesnakeOfficial/starter-snake-javascript")
     next()
 })
+app.use(bodyParser.json())
 
 
 const port = process.env.PORT || 8080
