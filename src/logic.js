@@ -6,8 +6,8 @@ function info() {
         apiversion: "1",
         author: "reveurguy",
         color: "#fbd786",
-        head: "crystal-power",
-        tail: "crystal-power"
+        head: "trans-rights-scarf",
+        tail: "bolt"
     }
     return response
 }
